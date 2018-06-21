@@ -4,10 +4,12 @@ class Admin::ProductsController < ApplicationController
     @products = Product.order(id: :desc).all
   end
 
+  #get request
   def new
     @product = Product.new
   end
 
+  #post request
   def create
     @product = Product.new(product_params)
 
