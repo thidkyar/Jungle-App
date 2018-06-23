@@ -22,10 +22,24 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
-        </dl>
+            
+          <dt>Reviews<dt>
+          <dd>
+            <% @product.reviews.each do |review| %>
+            <dd>description: <%= review.description %></dd>
+            <dd>rating: <%= review.rating%></dd>
+            <% end %>
+            
+          </dd>
+          <% if current_user %>
+            <%= form_for [@product, Review.new], url: product_reviews_path(@product.id) do |f| %>
+            <p>Description: <%= f.text_field :description %></p>
+            <p>Rating: <%= f.select :rating, [1,2,3,4,5]%></p>
+            <%= f.submit "Submit" %>
+            <% end %>
+          <% end %>
+         </dl>
       </div>
     </div>
-
   </article>
-
 </section>
